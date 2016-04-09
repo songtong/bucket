@@ -15,6 +15,7 @@ ipc.on('something-dropped', function(event, data) {
     } else {
         showResult(data['text/uri-list'], type);
     }
+    focusMainWindow();
 });
 
 function urlType(data) {
@@ -34,6 +35,16 @@ function urlType(data) {
     }
 }
 
+const BrowserWindow = require('electron').remote.BrowserWindow;
+function focusMainWindow() {
+    var windows = BrowserWindow.getAllWindows();
+    for(var i = 0; i < windows.length; i++) {
+        if(windows[i].isResizable()) {
+            windows[i].focus();
+            break;
+        }
+    }
+}
 function getTitle(url, type) {
     if (type == 'cat') {
 	    var parts = url.split("&");
@@ -74,5 +85,6 @@ function showResult(result, type) {
     } else {
         addZabixGraph(result, "container" + containerIdx, Math.floor((screenSize.width - dndWindowSize) / 2), Math.max(Math.floor(screenSize.height / 2) - 200, 200));
     }
+    iNettuts.init();
     containerIdx = containerIdx + 1;
 }

@@ -69,7 +69,7 @@ a {color:white;}
 }
 #columns .widget .widget-content {
     background: #333 url(img/widget-content-bg.png) repeat-x;
-    padding: 0 5px;
+    padding: 0 0px;
     color: #DDD;
     -moz-border-radius-bottomleft: 2px;
     -moz-border-radius-bottomright: 2px;
