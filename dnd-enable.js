@@ -10,10 +10,12 @@ $(document).on('drop', function(e) {
     e.stopPropagation();
     
     var types = e.originalEvent.dataTransfer.types;
+    var data = {};
     for(i in types) {
         console.log(types[i] + ":" + e.originalEvent.dataTransfer.getData(types[i]));
+   	data[types[i]] = e.originalEvent.dataTransfer.getData(types[i]);
     }
     
-    ipc.send('something-dropped', e.originalEvent.dataTransfer.getData('text/uri-list'));
+    ipc.send('something-dropped', data);
 });
 

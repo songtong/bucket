@@ -1,21 +1,59 @@
 // uknow
 
-function subscribeClog(appId) {
+function subscribeClog(url, containerId) {
 	function plotChart(data) {
 		// create dom.
 		var $container = $('<div>');
-		$container.highcharts({
+            /*   $('#' + containerId).highcharts({
+                    title: {
+                        text: 'Exception Count',
+                        x: -20 //center
+                    },
+                    subtitle: {
+                        text: '',
+                        x: -20
+                    },
+                    xAxis: {
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Count'
+                        },
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }]
+                    },
+                    tooltip: {
+                        valueSuffix: 'Times'
+                    },
+                    // legend: {
+                        // layout: 'vertical',
+                        // align: 'top',
+                        // verticalAlign: 'top',
+                        // borderWidth: 0
+                    // },
+                    series: data
+                });
+*/
+		$('#' + containerId).highcharts({
 			chart: {
 				events: {
-	            	load: function(){
-	            		this.addSeries[{
-	            			name: 'NotFoundException',
-	            			data: [3, 4]
-	            		}]
-	            	}
+					load: function(){
+						//this.addSeries[{
+						//	name: 'NotFoundException',
+						//	y: 3
+						//}, {
+						//	name: 'NullPointerException',
+						//	y: 4
+						//}]
+					}
 				}
 			},
-			title: {
+		title: {
 	            text: 'Excetions Count'
 	        },
 	        plotOptions: {
@@ -24,28 +62,29 @@ function subscribeClog(appId) {
 	                borderWidth: 0
 	            }
 	        },
-	        xAxis: {
-	            categories: ['Success', 'Failure'],
+	        xAxis:{
+	            type: 'Excetion',
 	            crosshair: true
 	        },
 	        yAxis: {
 	            title: {
-	                text: 'Times'
+	                text: 'Count'
 	            },
-		        min: 0
+		    min: 0
 	        },
-	        series: []
+	        series: [{name: "a", y: 23}]
 		});
+
 	}
 	
 	var today = new Date();
 	$.ajax({
 		url: 'http://ws.logging.ctripcorp.com/exceptions/exception-list',
-		dataType: 'jsonp',
+		dataType: 'json',
 		data: {
-			fromDate: today.lastNDay(7),
+			fromDate: today.lastNDay(7).format(),
 			toDate: today.format(),
-			appId: appId
+			appId: 922201
 		},
 		success: function(data) {
 			plotChart(data); 
@@ -55,3 +94,4 @@ function subscribeClog(appId) {
 		}
 	});
 }
+
