@@ -32,8 +32,7 @@ function getCatTitle(url) {
 
 function getRandomColor() {
     var i = Math.random();
-    i = Math.round((i * 10) % 5);
-    console.log(i);
+    i = Math.round(i * 10) % 5;
     return colors[i];
 }
 

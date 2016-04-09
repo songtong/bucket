@@ -17,7 +17,7 @@ ipcMain.on('something-dropped', function(event, arg) {
 });
 
 function createWindow () {
-    var dndWindowSize = 250;
+    var dndWindowSize = 128;
     var screenSize = electron.screen.getPrimaryDisplay().workAreaSize;
       
   // Create the browser window.
@@ -49,7 +49,8 @@ function createDndWindow (x, y, dndWindowSize) {
       height: dndWindowSize, 
       alwaysOnTop: true, 
       frame: false, 
-      resizable: false
+      resizable: false,
+      transparent: true
     });
 
   // and load the index.html of the app.

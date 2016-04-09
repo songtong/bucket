@@ -46,12 +46,12 @@ function txToChart(txUrl, containerId) {
                     tooltip: {
                         valueSuffix: '°C'
                     },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle',
-                        borderWidth: 0
-                    },
+                    // legend: {
+                        // layout: 'vertical',
+                        // align: 'top',
+                        // verticalAlign: 'top',
+                        // borderWidth: 0
+                    // },
                     series: [{
                         name: nameElement.$.id,
                         data: datas
