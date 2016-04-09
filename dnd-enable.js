@@ -12,7 +12,7 @@ function getImageName(url) {
     } else if (url.indexOf("zabbix") >= 0) {
         console.log("z")
         return "z.png";
-    } else if (url.indexOf("logging") >= 0) {
+    } else if (url.indexOf("about:blank") >= 0) {
         console.log("f")
         return "f.png";
     } else {
