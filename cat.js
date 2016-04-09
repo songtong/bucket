@@ -1,4 +1,4 @@
-function txToChart(txUrl) {
+function txToChart(txUrl, containerId) {
     $.ajax({
         url: txUrl,
     })
@@ -18,7 +18,7 @@ function txToChart(txUrl) {
                 }
 
 
-                $('#container').highcharts({
+                $('#' + containerId).highcharts({
                     title: {
                         text: 'Monthly Average Temperature',
                         x: -20 //center
