@@ -2,8 +2,6 @@
 
 function subscribeClog(url, containerId) {
 	function plotChart(data) {
-		// create dom.
-		var $container = $('<div>');
             /*   $('#' + containerId).highcharts({
                     title: {
                         text: 'Exception Count',
@@ -39,67 +37,72 @@ function subscribeClog(url, containerId) {
                     series: data
                 });
 */
+	//var splits = $(url).eq(1).text().split(' ');
+	//var appId = splits[0];
 
-	var xx = [{name: "huazai", data: data.map(function(input){return input.count;})}];
+	var series= [{name: "huazai", data: data.map(function(input){return input.count;})}];
 	var categories = data.map(function(input){return input.name;});
 	
 	
 
-		$('#' + containerId).highcharts({
-        chart: {
-            type: 'bar'
-        },
-        title: {
-            text: 'Xxxxxx'
-        },
-        subtitle: {
-            text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">CLOG</a>'
-        },
-        xAxis: {
-            categories: categories,
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Exception Count',
-                align: 'high'
-            },
-            labels: {
-                overflow: 'justify'
-            }
-        },
-        tooltip: {
-            valueSuffix: ' millions'
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true
-                }
-            }
-        },
-        legend: {
-			enabled: false,
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 80,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor:  '#FFFFFF',
-            shadow: true
-        },
-        credits: {
-            enabled: false
-        },
-        series: xx
-    });
+	$('#' + containerId).highcharts({
+		chart: {
+		    type: 'bar'
+		},
+		title: {
+		    text: 'Exception Count'
+		},
+		subtitle: {
+		    text: 'Source: <a href="http://logging.ctripcorp.com">CLOG</a>'
+		},
+		xAxis: {
+		    categories: categories,
+		    title: {
+			text: null
+		    }
+		},
+		yAxis: {
+		    min: 0,
+		    title: {
+			text: 'Exception Count',
+			align: 'high'
+		    },
+		    labels: {
+			overflow: 'justify'
+		    }
+		},
+		tooltip: {
+		    valueSuffix: ' millions'
+		},
+		plotOptions: {
+		    bar: {
+			dataLabels: {
+			    enabled: true
+			}
+		    }
+		},
+		legend: {
+		    enabled: false,
+		    layout: 'vertical',
+		    align: 'right',
+		    verticalAlign: 'top',
+		    x: -40,
+		    y: 80,
+		    floating: true,
+		    borderWidth: 1,
+		    backgroundColor:  '#FFFFFF',
+		    shadow: true
+		},
+		credits: {
+		    enabled: false
+		},
+		series: series
+	    });
 
 	}
+	
+	var splits = $(url).eq(1).text().split(' ');
+	var appId = splits[0];
 	
 	var today = new Date();
 	$.ajax({
@@ -108,7 +111,7 @@ function subscribeClog(url, containerId) {
 		data: {
 			fromDate: today.lastNDay(7).format(),
 			toDate: today.format(),
-			appId: 922201
+			appId: appId
 		},
 		success: function(data) {
 			plotChart(data); 
