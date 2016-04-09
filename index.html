@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>iTerm SSH</title>
+    <script src="iterm.js"></script>
+    <script>
+        window.$ = window.jQuery = require('./jquery-2.1.4.min.js');
+    </script>
+    <script src="dnd.js"></script>
+  </head>
+  <body>
+    <input id="a"></input>-
+    <input id="b"></input>-
+    <input id="c"></input>-
+    <input id="d"></input>
+    <div id="div"></div>
+    Port: <input id="port" value="22">
+    <br/>
+    <input type="radio" name="env" value="fws" checked>fws</input>
+    <input type="radio" name="env" value="uat">uat</input>
+    <br/>
+    <input type="radio" name="app" value="metaserver" checked>metaserver</input>
+    <input type="radio" name="app" value="broker">broker</input>
+    <input type="radio" name="app" value="portal">portal</input>
+    <br/>
+    <button onclick="generate()">Generate</button>
+    <webview id="foo" src="https://www.baidu.com" style="display:inline-block; width:640px; height:480px"></webview>
+  </body>
+</html>
