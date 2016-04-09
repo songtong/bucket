@@ -77,7 +77,7 @@ function showResult(result, type) {
     var p = document.createElement("li");
     p.className += "widget color-" + getRandomColor();
     document.getElementById(ulId).appendChild(p);
-    p.innerHTML = "<div class='widget-head'><h3>" + getTitle(result, type) + "</h3> <button class='btn btn-primary btn-xs'>autoRefresh</div><div class = 'widget-content'> <div id='container" + containerIdx + "' style='width: 100%; height: 100%; margin: 0 auto'></div></div> ";
+    p.innerHTML = "<div class='widget-head'><h3>" + getTitle(result, type) + "</h3> </div><div class = 'widget-content'> <div id='container" + containerIdx + "' style='width: 100%; height: 100%; margin: 0 auto'></div></div> ";
     if (type == 'cat') { 
 	txToChart(result + "&forceDownload=xml", "container" + containerIdx);
     } else if (type == 'clog') {

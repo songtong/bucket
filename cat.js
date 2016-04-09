@@ -36,6 +36,75 @@ function getLastWeekUrl(txUrl) {
 }
 
 function txToChart(txUrl, containerId) {
+	var initialized = false;
+	function plotChart(nameElement, datas, datasOld) {
+		if (!initialized) {
+
+        $('#' + containerId).highcharts({
+            chart: {
+                type: 'spline'
+            },
+            plotOptions: {
+                spline: {
+                    lineWidth: 3
+                }
+            },
+            title: {
+                text: nameElement.$.id,
+                x: -20 //center
+            },
+            /*
+            xAxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            },
+            */
+            yAxis: {
+                title: {
+                    text: 'count'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            // tooltip: {
+
+            // },
+            // legend: {
+            // layout: 'vertical',
+            // align: 'top',
+            // verticalAlign: 'top',
+            // borderWidth: 0
+            // },
+            series: [{
+                name: nameElement.$.id,
+                data: datas,
+                marker: { enabled: false },
+                zones: [{
+                    value: 50,
+                    color: '#54ac45'
+                }, {
+                    value: 100,
+                    color: '#e89c38'
+                }, {
+                    color: '#c93b3e'
+                }]
+            }, {
+                name: nameElement.$.id + "_Last_Week",
+                data: datasOld,
+                marker: { enabled: false },
+                dashStyle: 'ShortDash',
+                color: '#cccccc'
+            }]
+        });
+     } else {
+     		$('#' + containerId).highcharts().series[0].setData(datas);
+     }
+	}
+	
+	function scheduleAjaxCall() {
     $.ajax({
             url: txUrl,
         })
@@ -74,67 +143,14 @@ function txToChart(txUrl, containerId) {
                             datasOld[i] = parseInt(nameElementOld.range[i].$.avg);
                         }
 
-                        $('#' + containerId).highcharts({
-                            chart: {
-                                type: 'spline'
-                            },
-                            plotOptions: {
-                                spline: {
-                                    lineWidth: 3
-                                }
-                            },
-                            title: {
-                                text: nameElement.$.id,
-                                x: -20 //center
-                            },
-                            /*
-                            xAxis: {
-                                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                            },
-                            */
-                            yAxis: {
-                                title: {
-                                    text: 'count'
-                                },
-                                plotLines: [{
-                                    value: 0,
-                                    width: 1,
-                                    color: '#808080'
-                                }]
-                            },
-                            // tooltip: {
-
-                            // },
-                            // legend: {
-                            // layout: 'vertical',
-                            // align: 'top',
-                            // verticalAlign: 'top',
-                            // borderWidth: 0
-                            // },
-                            series: [{
-                                name: nameElement.$.id,
-                                data: datas,
-                                marker: { enabled: false },
-                                zones: [{
-                                    value: 50,
-                                    color: '#54ac45'
-                                }, {
-                                    value: 100,
-                                    color: '#e89c38'
-                                }, {
-                                    color: '#c93b3e'
-                                }]
-                            }, {
-                                name: nameElement.$.id + "_Last_Week",
-                                data: datasOld,
-                                marker: { enabled: false },
-                                dashStyle: 'ShortDash',
-                                color: '#cccccc'
-                            }]
-                        });
-                    });
-                });
-            });
-        });
+										
+                			   plotChart(nameElement, datas, datasOld);
+            		});
+        		});
+   				});
+	 			});
+	 }
+   scheduleAjaxCall();
+      
+   setInterval(scheduleAjaxCall, 30000);
 }

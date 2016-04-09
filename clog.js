@@ -97,7 +97,8 @@ function subscribeClog(url, containerId) {
 	}
 	
 	scheduleAjaxCall();
-	
+	setInterval(scheduleAjaxCall, 30000);
+	/*	
 	$container.parents('.widget').find('.widget-head .btn').on('click', function(e){
 		e.preventDefault();
 		e.stopPropagation();
@@ -111,5 +112,6 @@ function subscribeClog(url, containerId) {
 			$target.data('handler', handler);
 		}
 	});
+	*/
 }
 
