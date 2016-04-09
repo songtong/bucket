@@ -5,6 +5,7 @@ var colors = ["yellow", "red", "blue", "orange", "green"]
 ipc.on('something-dropped', function(event, arg) {
     var url = arg;
     showResult(arg);
+    focusMainWindow();
 });
 
 function urlType(url) {
@@ -16,7 +17,16 @@ function urlType(url) {
         return "unknown";
     }
 }
-
+const BrowserWindow = require('electron').remote.BrowserWindow;
+function focusMainWindow() {
+    var windows = BrowserWindow.getAllWindows();
+    for(var i = 0; i < windows.length; i++) {
+        if(windows[i].isResizable()) {
+            windows[i].focus();
+            break;
+        }
+    }
+}
 function getCatTitle(url) {
     var parts = url.split("&");
     for (var i = 0; i < parts.length; i++) {
@@ -45,5 +55,6 @@ function showResult(result) {
     document.getElementById(ulId).appendChild(p);
     p.innerHTML = "<div class='widget-head'><h3>" + getCatTitle(result) + "</h3></div><div class = 'widget-content'> <div id='container" + containerIdx + "' style='width: 100%; height: 100%; margin: 0 auto'></div></div> ";
     txToChart(result + "&forceDownload=xml", "container" + containerIdx);
+    iNettuts.init();
     containerIdx = containerIdx + 1;
 }
