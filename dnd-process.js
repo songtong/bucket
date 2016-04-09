@@ -58,9 +58,14 @@ function getTitle(url, type) {
 	    }
 	    return "CAT";
     } else if (type == 'clog'){
-    	return 'Clog';
+        // url: <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"><a href="javascript:void(0)">100001348 酒店精准控房 5.58K</a>
+        var lastQuote = url.lastIndexOf('"');
+        var appId = url.substring(lastQuote + 2, url.indexOf(" ", lastQuote));
+    	return 'CLOG ' + appId;
     } else {
-        return "Zabbix"
+        // url: https://zabbixdb.sh.ctripcorp.com/charts.php?graphid=12148850&period=3600&stime=20160409161125&sid=99a1cc560e1dc2e1
+        var graphid = url.substring(url.indexOf("=") + 1, url.indexOf("&"));
+        return "Zabbix " + graphid;
     }
 }
 
