@@ -17,8 +17,11 @@ ipcMain.on('something-dropped', function(event, arg) {
 });
 
 function createWindow () {
+    var dndWindowSize = 250;
+    var screenSize = electron.screen.getPrimaryDisplay().workAreaSize;
+      
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1600, height: 800});
+  mainWindow = new BrowserWindow({width: screenSize.width - dndWindowSize, height: screenSize.height, x: 0, y: 0});
 
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/index.html');
@@ -34,12 +37,20 @@ function createWindow () {
     mainWindow = null;
   });
   
-  createDndWindow();
+  createDndWindow(screenSize.width - dndWindowSize, (screenSize.height - dndWindowSize) / 2, dndWindowSize);
 }
 
-function createDndWindow () {
+function createDndWindow (x, y, dndWindowSize) {
   // Create the browser window.
-  dndWindow = new BrowserWindow({width: 250, height: 250});
+  dndWindow = new BrowserWindow({
+      x: Math.ceil(x), 
+      y: Math.ceil(y), 
+      width: dndWindowSize, 
+      height: dndWindowSize, 
+      alwaysOnTop: true, 
+      frame: false, 
+      resizable: false
+    });
 
   // and load the index.html of the app.
   dndWindow.loadURL('file://' + __dirname + '/dnd-window.html');
