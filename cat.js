@@ -22,6 +22,11 @@ function txToChart(txUrl, containerId) {
                     chart: {
                         type: 'spline'
                     },
+                    plotOptions: {  
+                        spline: {  
+                            lineWidth: 3
+                        }  
+                    },  
                     title: {
                         text: nameElement.$.id,
                         x: -20 //center
@@ -57,12 +62,12 @@ function txToChart(txUrl, containerId) {
                         marker: { enabled: false },
                         zones: [{
                             value: 50,
-                            color: '#00ff00'
+                            color: '#54ac45'
                         }, {
                             value: 100,
-                            color: '#ffff00'
+                            color: '#e89c38'
                         }, {
-                            color: '#ff0000'
+                            color: '#c93b3e'
                         }]
                     }]
                 });
