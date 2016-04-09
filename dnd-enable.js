@@ -3,17 +3,13 @@ var flag = true;
 
 function getImageName(url) {
     if (url == undefined) {
-        console.log("v")
         return "v.png";
     }
     if (url.indexOf("cat.ctripcorp.com") >= 0) {
-        console.log("c")
         return "c.png";
     } else if (url.indexOf("zabbix") >= 0) {
-        console.log("z")
-        return "z.png";
+        return "zz.png";
     } else if (url.indexOf("about:blank") >= 0) {
-        console.log("f")
         return "f.png";
     } else {
         return "v.png";
