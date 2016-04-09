@@ -96,6 +96,7 @@ function subscribeClog(url, containerId) {
 		});
 	}
 	
+	scheduleAjaxCall();
 	setInterval(scheduleAjaxCall, 30000);
 	/*	
 	$container.parents('.widget').find('.widget-head .btn').on('click', function(e){

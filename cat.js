@@ -150,6 +150,7 @@ function txToChart(txUrl, containerId) {
    				});
 	 			});
 	 }
+   scheduleAjaxCall();
       
    setInterval(scheduleAjaxCall, 30000);
 }
