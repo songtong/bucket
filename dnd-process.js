@@ -1,13 +1,19 @@
-var ipc = require("electron").ipcRenderer;
+var electron = require("electron"); 
+var ipc = electron.ipcRenderer;
+var screenSize = electron.screen.getPrimaryDisplay().workAreaSize;
 var flag = true;
 var containerIdx = 0;
 var colors = ["yellow", "red", "blue", "orange", "green"]
+var dndWindowSize = 128;
+
 ipc.on('something-dropped', function(event, data) { 	
     var type = urlType(data);
     if (type == 'cat') {
-	showResult(data['text/uri-list'], type)
+	    showResult(data['text/uri-list'], type)
+    } else if(type == 'clog') {
+	    showResult(data['text/html'], type);
     } else {
-	showResult(data['text/html'], type);
+        showResult(data['text/uri-list'], type);
     }
 });
 
@@ -42,6 +48,8 @@ function getTitle(url, type) {
 	    return "CAT";
     } else if (type == 'clog'){
     	return 'Clog';
+    } else {
+        return "Zabbix"
     }
 }
 
@@ -61,8 +69,10 @@ function showResult(result, type) {
     p.innerHTML = "<div class='widget-head'><h3>" + getTitle(result, type) + "</h3></div><div class = 'widget-content'> <div id='container" + containerIdx + "' style='width: 100%; height: 100%; margin: 0 auto'></div></div> ";
     if (type == 'cat') { 
 	txToChart(result + "&forceDownload=xml", "container" + containerIdx);
-    } else {
+    } else if (type == 'clog') {
         subscribeClog(result, "container" + containerIdx);
+    } else {
+        addZabixGraph(result, "container" + containerIdx, Math.floor((screenSize.width - dndWindowSize) / 2), Math.max(Math.floor(screenSize.height / 2) - 200, 200));
     }
     containerIdx = containerIdx + 1;
 }
