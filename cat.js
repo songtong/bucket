@@ -1,7 +1,7 @@
 function txToChart(txUrl, containerId) {
     $.ajax({
-        url: txUrl,
-    })
+            url: txUrl,
+        })
         .done(function(data) {
             var fs = require('fs');
             var xml2js = require('xml2js');
@@ -19,13 +19,12 @@ function txToChart(txUrl, containerId) {
 
 
                 $('#' + containerId).highcharts({
-                    title: {
-                        text: 'Monthly Average Temperature',
-                        x: -20 //center
+                    chart: {
+                        type: 'spline'
                     },
-                    subtitle: {
-                        text: 'Source: WorldClimate.com',
-                        x: -20
+                    title: {
+                        text: nameElement.$.id,
+                        x: -20 //center
                     },
                     /*
                     xAxis: {
@@ -35,7 +34,7 @@ function txToChart(txUrl, containerId) {
                     */
                     yAxis: {
                         title: {
-                            text: 'Temperature (°C)'
+                            text: 'count'
                         },
                         plotLines: [{
                             value: 0,
@@ -43,18 +42,28 @@ function txToChart(txUrl, containerId) {
                             color: '#808080'
                         }]
                     },
-                    tooltip: {
-                        valueSuffix: '°C'
-                    },
+                    // tooltip: {
+
+                    // },
                     // legend: {
-                        // layout: 'vertical',
-                        // align: 'top',
-                        // verticalAlign: 'top',
-                        // borderWidth: 0
+                    // layout: 'vertical',
+                    // align: 'top',
+                    // verticalAlign: 'top',
+                    // borderWidth: 0
                     // },
                     series: [{
                         name: nameElement.$.id,
-                        data: datas
+                        data: datas,
+                        marker: { enabled: false },
+                        zones: [{
+                            value: 50,
+                            color: '#00ff00'
+                        }, {
+                            value: 100,
+                            color: '#ffff00'
+                        }, {
+                            color: '#ff0000'
+                        }]
                     }]
                 });
             });
