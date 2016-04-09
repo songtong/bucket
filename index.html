@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Magic</title>
+    <script>
+        window.$ = window.jQuery = require('./jquery-2.1.4.min.js');
+    </script>
+    <script src="highcharts/highcharts.js"></script>
+    <script src="highcharts/modules/exporting.js"></script>
+    <script src="cat.js"></script>
+    <script src="dnd-process.js"></script>
+    
+    <script>
+        txToChart("http://cat.ctripcorp.com/cat/r/t?op=graphs&domain=110402&date=2016040914&ip=All&type=Message.Consume.Latency&name=hotel.product.seqrules%3Ahotel.product.searchserver.seqrules_0&forceDownload=xml");
+    </script>
+  </head>
+  <body>
+    <div id="container" style="width: 1000px; height: 400px; margin: 0 auto"></div>
+  </body>
+</html>
