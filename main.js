@@ -9,6 +9,12 @@ const BrowserWindow = electron.BrowserWindow;
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let dndWindow;
+
+const ipcMain = electron.ipcMain;
+ipcMain.on('something-dropped', function(event, arg) {
+    mainWindow.webContents.send('something-dropped', arg);
+});
 
 function createWindow () {
   // Create the browser window.
@@ -26,6 +32,27 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
+  });
+  
+  createDndWindow();
+}
+
+function createDndWindow () {
+  // Create the browser window.
+  dndWindow = new BrowserWindow({width: 250, height: 250});
+
+  // and load the index.html of the app.
+  dndWindow.loadURL('file://' + __dirname + '/dnd-window.html');
+
+  // Open the DevTools.
+  //mainWindow.webContents.openDevTools();
+
+  // Emitted when the window is closed.
+  dndWindow.on('closed', function() {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    dndWindow = null;
   });
 }
 
