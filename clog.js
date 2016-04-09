@@ -39,41 +39,65 @@ function subscribeClog(url, containerId) {
                     series: data
                 });
 */
+
+	var xx = [{name: "huazai", data: data.map(function(input){return input.count;})}];
+	var categories = data.map(function(input){return input.name;});
+	
+	
+
 		$('#' + containerId).highcharts({
-			chart: {
-				events: {
-					load: function(){
-						//this.addSeries[{
-						//	name: 'NotFoundException',
-						//	y: 3
-						//}, {
-						//	name: 'NullPointerException',
-						//	y: 4
-						//}]
-					}
-				}
-			},
-		title: {
-	            text: 'Excetions Count'
-	        },
-	        plotOptions: {
-	        	column: {
-	                pointPadding: 0.2,
-	                borderWidth: 0
-	            }
-	        },
-	        xAxis:{
-	            type: 'Excetion',
-	            crosshair: true
-	        },
-	        yAxis: {
-	            title: {
-	                text: 'Count'
-	            },
-		    min: 0
-	        },
-	        series: [{name: "a", y: 23}]
-		});
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Xxxxxx'
+        },
+        subtitle: {
+            text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">CLOG</a>'
+        },
+        xAxis: {
+            categories: categories,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Exception Count',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' millions'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+			enabled: false,
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor:  '#FFFFFF',
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: xx
+    });
 
 	}
 	
