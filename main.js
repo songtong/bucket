@@ -26,6 +26,7 @@ function createWindow() {
         height: screenSize.height,
         x: 0,
         y: 0,
+        transparent: true,
         frame: false
     });
 
