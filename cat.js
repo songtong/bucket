@@ -51,7 +51,8 @@ function txToChart(txUrl, containerId) {
             },
             title: {
                 text: nameElement.$.id,
-                x: -20 //center
+                x: -20, //center
+                style: { "color": "#000000", "fontSize": "12px" }
             },
             /*
             xAxis: {

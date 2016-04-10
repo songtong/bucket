@@ -21,7 +21,8 @@ function subscribeClog(url, containerId) {
 				    }
 				},
 				title: {
-				    text: 'Exception Count'
+				    text: 'Exception Count',
+					style: { "color": "#000000", "fontSize": "12px" }
 				},
 				subtitle: {
 				    text: 'Source: <a href="http://logging.ctripcorp.com">CLOG</a>'
